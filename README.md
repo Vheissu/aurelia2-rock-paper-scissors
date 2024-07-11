@@ -1,6 +1,6 @@
 # Aurelia 2 Rock Paper Scissors
 
-A rock paper scissors game where you vs the computer. It is written using Aurelia 2 and Tailwind.
+A rock paper scissors game where you vs the computer. It is written using Aurelia 2 and Tailwind. Font Awesome 5 was used for the icons.
 
 As always, do what you want with the code.
 

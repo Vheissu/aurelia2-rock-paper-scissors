@@ -4,7 +4,7 @@ A rock paper scissors game where you vs the computer. It is written using Aureli
 
 As always, do what you want with the code.
 
-See it in action here: https://github.com/Vheissu/aurelia2-rock-paper-scissors
+See it in action here: https://aurelia2-rock-paper-scissors.vercel.app/
 
 ## Running it
 

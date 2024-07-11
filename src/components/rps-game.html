@@ -1,0 +1,95 @@
+<div
+  class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4"
+>
+  <div
+    class="bg-white bg-opacity-90 p-8 rounded-3xl shadow-2xl max-w-2xl w-full backdrop-blur-sm"
+  >
+
+    <h1
+      class="text-5xl font-extrabold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"
+    >
+      Rock Paper Scissors
+    </h1>
+
+    <div
+      if.bind="gameMode === 'bestOfThree'"
+      class="flex justify-center mb-8 bg-gray-100 rounded-lg p-4"
+    >
+      <div class="text-center px-8 border-r border-gray-300">
+        <h2 class="text-xl font-semibold mb-2 text-purple-600">You</h2>
+        <p class="text-4xl font-bold">${playerScore}</p>
+      </div>
+      <div class="text-center px-8">
+        <h2 class="text-xl font-semibold mb-2 text-pink-600">Computer</h2>
+        <p class="text-4xl font-bold">${computerScore}</p>
+      </div>
+    </div>
+
+    <div if.bind="!gameOver" class="flex justify-center space-x-6 mb-8">
+      <button
+        repeat.for="choice of choices"
+        click.trigger="play(choice.name)"
+        class="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-110 shadow-lg"
+      >
+        <img
+          src="${choice.image}"
+          alt="${choice.name}"
+          class="w-16 h-16 mx-auto"
+        />
+      </button>
+    </div>
+
+    <div if.bind="result && !gameOver" class="text-center mb-8">
+      <h2
+        class="text-3xl font-bold mb-4 ${result === 'win' ? 'text-green-600' : result === 'lose' ? 'text-red-600' : 'text-yellow-600'} animate-bounce"
+      >
+        ${result === 'win' ? 'You win!' : result === 'lose' ? 'You lose!' :
+        'It\'s a draw!'}
+      </h2>
+      <div class="flex justify-center items-center space-x-8">
+        <div class="text-center">
+          <img
+            src="${choices.find(c => c.name === playerChoice).image}"
+            alt="${playerChoice}"
+            class="w-16 h-16 mx-auto mb-2 animate-spin-slow"
+          />
+          <p class="text-lg font-semibold">You</p>
+        </div>
+        <div class="text-4xl font-bold">VS</div>
+        <div class="text-center">
+          <img
+            src="${choices.find(c => c.name === computerChoice).image}"
+            alt="${computerChoice}"
+            class="w-16 h-16 mx-auto mb-2 animate-spin-slow"
+          />
+          <p class="text-lg font-semibold">Computer</p>
+        </div>
+      </div>
+    </div>
+
+    <div if.bind="gameOver" class="text-center mb-8 animate-fade-in">
+      <h2 class="text-3xl font-bold mb-4">${finalResult}</h2>
+      <p class="text-xl">
+        Final Score: You ${playerScore} - ${computerScore} Computer
+      </p>
+    </div>
+
+    <button
+      if.bind="result || gameOver"
+      click.trigger="reset()"
+      class="w-full py-3 px-6 bg-gradient-to-r mb-3 from-purple-600 to-pink-600 text-white font-bold rounded-lg shadow-md hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition-all duration-300 animate-pulse text-lg"
+    >
+      ${gameOver || gameMode === 'single' ? 'New Game' : 'Next Round'}
+    </button>
+
+    <div class="bg-gray-100 rounded-full p-1 text-center">
+      <button
+        repeat.for="mode of ['single', 'bestOfThree']"
+        click.trigger="setGameMode(mode)"
+        class="px-4 py-2 text-sm font-medium rounded-full ${gameMode === mode ? 'bg-purple-600 text-white' : 'text-gray-600'} hover:bg-purple-500 hover:text-white transition-colors duration-200"
+      >
+        ${mode === 'single' ? 'Single Game' : 'Best of 3'}
+      </button>
+    </div>
+  </div>
+</div>
